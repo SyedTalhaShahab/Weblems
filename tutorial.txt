@@ -1,0 +1,72 @@
+vi /opt/bitnami/apache/conf/vhosts/myapp-http-vhost.conf
+
+vi /opt/bitnami/apache/conf/vhosts/myapp-https-vhost.conf
+
+Directory of your project:
+/home/bitnami/htdocs/WeblemsHomepage
+
+VirtualHost:
+<VirtualHost 127.0.0.1:80 _default_:80>
+	ServerAlias *
+	DocumentRoot "/home/bitnami/htdocs/WeblemsHomepage"
+	<Directory "/home/bitnami/htdocs/WeblemsHomepage">
+		Require all granted
+	<Directory>
+	ProxyPass / http://localhost:3000/
+	ProxyPassReverse / http:localhost:3000/
+</VirtualHost>
+
+<VirtualHost 127.0.0.1:443 _default_:443>
+	ServerAlias *
+	SSLEngine on
+	SSLCertificateFile "/opt/bitnami/apache/conf/bitnami/certs/server.crt"
+	SSLCertificateKeyFile "/opt/bitnami/apache/conf/bitnami/certs/sever.key"
+	DocumentRoot "/home/bitnami/htdocs/WeblemsHomepage"
+	<Directory "/home/bitnami/htdocs/WeblemsHomepage">
+		Require all granted
+	<Directory>
+	ProxyPass / http://localhost:3000/
+	ProxyPassReverse / http:localhost:3000/
+</VirtualHost>
+
+
+Copy and paste as is from here: https://docs.bitnami.com/aws/infrastructure/nodejs/get-started/get-started/
+
+
+
+
+
+
+
+
+
+/Warning: Certificates may not renew automatically, due to a web server 
+configuration issue. For more information see: 
+https://docs.bitnami.com/general/how-to/understand-bncert/#certificates-not-renew
+ed-automatically
+Press [Enter] to continue:
+----------------------------------------------------------------------------
+Some errors occurred
+
+The configuration was applied, but some of the changes could not be applied. 
+Find the details below.
+
+The configuration report is shown below.
+
+Failed steps:
+* Creating Let's Encrypt certificate: Automatic renewal not working
+
+Backup files:
+* /opt/bitnami/apache/conf/httpd.conf.back.202306240733
+* /opt/bitnami/apache/conf/bitnami/bitnami.conf.back.202306240733
+* /opt/bitnami/apache/conf/bitnami/bitnami-ssl.conf.back.202306240733
+* /opt/bitnami/apache/conf/vhosts/myapp-http-vhost.conf.back.202306240733
+* /opt/bitnami/apache/conf/vhosts/myapp-https-vhost.conf.back.202306240733
+
+Find more details in the log file:
+
+/tmp/bncert-202306240733.log
+
+If you find any issues, please check Bitnami Support forums at:
+
+https://github.com/bitnami/vms
